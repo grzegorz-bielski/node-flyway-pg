@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  flyway:
+    env_file: .env
+    image: flyway/flyway
+    command: -url=jdbc:postgresql://db:5432/postgres -user=$POSTGRES_USER -password=$POSTGRES_PASSWORD -connectRetries=60 migrate
+    volumes:
+      - ./sql:/flyway/sql
+    depends_on:
+      - db
+
+  db:
+    container_name: flyway-demo-db
+    env_file: .env
+    image: postgres:13.0
+    restart: unless-stopped
+    ports: 
+      - 5432:5432
+    volumes:
+      - ./dbData:/var/lib/postgresql/data
