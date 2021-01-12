@@ -1,4 +1,4 @@
-## flyway-node-pg-express playground
+## node-playground
 
 An exemplary integration of:
 
