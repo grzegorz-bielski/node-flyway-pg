@@ -14,7 +14,10 @@ proxyServer.use(cors());
 
 proxyServer.put("/upload-proxy", async (req, res) => {
   try {
-    const uploadStream = got.stream.put("http://localhost:3002/upload-receive");
+    const uploadStream = got.stream.put(
+      "http://localhost:3002/upload-receive",
+      { headers: req.headers } // remember to pass the headers! 🙀
+    );
 
     await pipe(req, uploadStream);
 

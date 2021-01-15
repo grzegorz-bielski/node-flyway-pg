@@ -18,7 +18,10 @@
             const formData = new FormData();
             formData.append('someFile', input.files[0])
 
-            fetch('http://localhost:3001/upload-proxy', { method: 'PUT', body: formData })
+            const url = 'http://localhost:3001/upload-proxy' // proxy
+            // const url = 'http://localhost:3002/upload-receive' // direct
+
+            fetch(url, { method: 'PUT', body: formData })
                 .then(res => res.json())
                 .then(res => console.log("res", res))
                 .catch(err => console.log("err", err))
